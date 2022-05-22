@@ -1,0 +1,283 @@
+local Exoliner = {}
+
+function Exoliner.New(Name, Emoji)
+	local Solar = Instance.new("ScreenGui")
+	local Background = Instance.new("ImageLabel")
+	local thumb = Instance.new("ImageLabel")
+	local UICorner = Instance.new("UICorner")
+	local Glow = Instance.new("ImageLabel")
+	local Pages = Instance.new("ImageLabel")
+	local Pages_Container = Instance.new("ScrollingFrame")
+	local UIListLayout = Instance.new("UIListLayout")
+	local TopBar = Instance.new("ImageLabel")
+	local Title = Instance.new("TextLabel")
+	local TextLabel = Instance.new("TextLabel")
+	Solar.Name = string.upper(Name)
+	Solar.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	Solar.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	Solar.ResetOnSpawn = false
+	Background.Name = "Background"
+	Background.Parent = Solar
+	Background.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+	Background.BackgroundTransparency = 1.000
+	Background.Position = UDim2.new(0.553882718, 0, 0.251664221, 0)
+	Background.Size = UDim2.new(0, 511, 0, 426)
+	Background.Image = "http://www.roblox.com/asset/?id=12181111"
+	Background.ImageColor3 = Color3.fromRGB(24, 24, 24)
+	Background.ScaleType = Enum.ScaleType.Slice
+	Background.SliceCenter = Rect.new(4, 4, 296, 296)
+	thumb.Name = "thumb"
+	thumb.Parent = Background
+	thumb.BackgroundColor3 = Color3.fromRGB(23, 23, 23)
+	thumb.BorderSizePixel = 0
+	thumb.Size = UDim2.new(0, 511, 0, 428)
+	thumb.ZIndex = 0
+	UICorner.CornerRadius = UDim.new(0, 5)
+	UICorner.Parent = thumb
+	Glow.Name = "Glow"
+	Glow.Parent = Background
+	Glow.BackgroundTransparency = 1.000
+	Glow.Position = UDim2.new(0, -15, 0, -13)
+	Glow.Size = UDim2.new(1, 30, 0.995097339, 30)
+	Glow.ZIndex = 0
+	Glow.Image = "rbxassetid://5028857084"
+	Glow.ImageColor3 = Color3.fromRGB(160, 68, 255)
+	Glow.ScaleType = Enum.ScaleType.Slice
+	Glow.SliceCenter = Rect.new(24, 24, 276, 276)
+	Pages.Name = "Pages"
+	Pages.Parent = Background
+	Pages.BackgroundTransparency = 1.000
+	Pages.ClipsDescendants = true
+	Pages.Position = UDim2.new(0, 0, 0, 38)
+	Pages.Size = UDim2.new(0, 126, 1, -38)
+	Pages.ZIndex = 3
+	Pages.Image = "rbxassetid://5012534273"
+	Pages.ImageColor3 = Color3.fromRGB(15, 15, 15)
+	Pages.ImageTransparency = 0.800
+	Pages.ScaleType = Enum.ScaleType.Slice
+	Pages.SliceCenter = Rect.new(4, 4, 296, 296)
+	Pages_Container.Name = "Pages_Container"
+	Pages_Container.Parent = Pages
+	Pages_Container.Active = true
+	Pages_Container.BackgroundTransparency = 1.000
+	Pages_Container.Position = UDim2.new(0, 0, 0.00857230928, 0)
+	Pages_Container.Size = UDim2.new(1, 0, 1.04270971, -20)
+	Pages_Container.CanvasSize = UDim2.new(0, 0, 0, 314)
+	Pages_Container.ScrollBarThickness = 0
+	UIListLayout.Parent = Pages_Container
+	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	UIListLayout.Padding = UDim.new(0, 10)
+	TopBar.Name = "TopBar"
+	TopBar.Parent = Background
+	TopBar.BackgroundTransparency = 1.000
+	TopBar.ClipsDescendants = true
+	TopBar.Size = UDim2.new(1, 0, 0, 38)
+	TopBar.ZIndex = 5
+	TopBar.Image = "rbxassetid://4595286933"
+	TopBar.ImageColor3 = Color3.fromRGB(15, 15, 15)
+	TopBar.ImageTransparency = 0.750
+	TopBar.ScaleType = Enum.ScaleType.Slice
+	TopBar.SliceCenter = Rect.new(4, 4, 296, 296)
+	Title.Name = "Title"
+	Title.Parent = TopBar
+	Title.AnchorPoint = Vector2.new(0, 0.5)
+	Title.BackgroundTransparency = 1.000
+	Title.Position = UDim2.new(0, 37, 0, 19)
+	Title.Size = UDim2.new(0.948150218, -46, 0, 16)
+	Title.ZIndex = 5
+	Title.Font = Enum.Font.GothamBlack
+	Title.Text = string.upper(Name)
+	Title.TextColor3 = Color3.fromRGB(160, 68, 255)
+	Title.TextSize = 14.000
+	Title.TextXAlignment = Enum.TextXAlignment.Left
+	TextLabel.Parent = TopBar
+	TextLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+	TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TextLabel.BackgroundTransparency = 1.000
+	TextLabel.Position = UDim2.new(0.0362035222, 0, 0.5, 0)
+	TextLabel.Size = UDim2.new(0, 494, 0, 20)
+	TextLabel.Font = Enum.Font.SourceSans
+	TextLabel.Text = Emoji
+	TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+	TextLabel.TextScaled = true
+	TextLabel.TextSize = 14.000
+	TextLabel.TextWrapped = true
+
+	local function Dragify()
+		local script = Instance.new('LocalScript', Background)
+
+		-- Decompiled with the Synapse X Luau decompiler.
+
+		local l__UserInputService__1 = game:GetService("UserInputService");
+		local function dragify(p1)
+			local dragToggle = nil;
+			local dragInput = nil;
+			local dragStart = nil;
+			local startPos
+			local function updateInput(p2)
+				local v1 = p2.Position - dragStart;
+				game:GetService("TweenService"):Create(p1, TweenInfo.new(0.25), {
+					Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + v1.X, startPos.Y.Scale, startPos.Y.Offset + v1.Y)
+				}):Play();
+			end;
+			p1.InputBegan:Connect(function(p3)
+				if p3.UserInputType ~= Enum.UserInputType.MouseButton1 then
+					if p3.UserInputType == Enum.UserInputType.Touch then
+						if l__UserInputService__1:GetFocusedTextBox() == nil then
+							dragToggle = true;
+							dragStart = p3.Position;
+							startPos = p1.Position;
+							p3.Changed:Connect(function()
+								if p3.UserInputState == Enum.UserInputState.End then
+									dragToggle = false;
+								end;
+							end);
+						end;
+					end;
+				elseif l__UserInputService__1:GetFocusedTextBox() == nil then
+					dragToggle = true;
+					dragStart = p3.Position;
+					startPos = p1.Position;
+					p3.Changed:Connect(function()
+						if p3.UserInputState == Enum.UserInputState.End then
+							dragToggle = false;
+						end;
+					end);
+				end;
+			end);
+			p1.InputChanged:Connect(function(p4)
+				if p4.UserInputType ~= Enum.UserInputType.MouseMovement then
+					if p4.UserInputType == Enum.UserInputType.Touch then
+						dragInput = p4;
+					end;
+				else
+					dragInput = p4;
+				end;
+			end);
+			game:GetService("UserInputService").InputChanged:Connect(function(p5)
+				if p5 == dragInput then
+					if dragToggle then
+						updateInput(p5);
+					end;
+				end;
+			end);
+		end;
+		dragify(script.Parent);
+
+	end
+
+	local function Visible()
+		local script = Instance.new('LocalScript', Background)
+
+		for i,v in pairs(script.Parent:GetChildren()) do
+			if v:IsA('Frame') then
+				v.Visible = false
+			end
+		end
+	end
+
+	Visible()
+	Dragify()
+	
+	local Tab = {}
+	
+	function Tab.Tab(Text, Icon)
+		local home = Instance.new("ScrollingFrame")
+		local UIListLayout = Instance.new("UIListLayout")
+		local home_2 = Instance.new("TextButton")
+		local Icon = Instance.new("ImageLabel")
+		local Namet = Instance.new("TextLabel")
+		home.Name = "home"
+		home.Parent = Background
+		home.Active = true
+		home.BackgroundTransparency = 1.000
+		home.BorderSizePixel = 0
+		home.Position = UDim2.new(0, 134, 0, 46)
+		home.Size = UDim2.new(1, -142, 1, -56)
+		home.CanvasSize = UDim2.new(0, 0, 0, 250)
+		home.ScrollBarThickness = 3
+		UIListLayout.Parent = home
+		UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+		UIListLayout.Padding = UDim.new(0, 10)
+		home_2.Name = "home"
+		home_2.Parent = Pages_Container
+		home_2.BackgroundTransparency = 1.000
+		home_2.BorderSizePixel = 0
+		home_2.Size = UDim2.new(1, 0, -0.00510789594, 26)
+		home_2.ZIndex = 3
+		home_2.AutoButtonColor = false
+		home_2.Font = Enum.Font.Gotham
+		home_2.Text = ""
+		home_2.TextColor3 = Color3.fromRGB(160, 68, 255)
+		home_2.TextSize = 14.000
+		home_2.TextXAlignment = Enum.TextXAlignment.Right
+		Icon.Name = "Icon"
+		Icon.Parent = home_2
+		Icon.AnchorPoint = Vector2.new(0, 0.5)
+		Icon.BackgroundTransparency = 1.000
+		Icon.Position = UDim2.new(0, 12, 0.5, 0)
+		Icon.Size = UDim2.new(0, 18, 0, 18)
+		Icon.ZIndex = 3
+		Icon.Image = Icon; if Icon == nil or Icon == "" or Icon == " " then Icon = "http://www.roblox.com/asset/?id=8130360540" end
+		Icon.ImageColor3 = Color3.fromRGB(160, 68, 255)
+		Icon.ImageTransparency = .5
+		Namet.Name = "Namet"
+		Namet.Parent = home_2
+		Namet.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Namet.BackgroundTransparency = 1.000
+		Namet.Position = UDim2.new(0.301587313, 0, 0, 0)
+		Namet.Size = UDim2.new(0.698412716, 0, -0.0049999929, 26)
+		Namet.Font = Enum.Font.Gotham
+		Namet.Text = Text; if Text == nil or Text == "" or Text == " " then Text = "New Tab" end
+		Namet.TextColor3 = Color3.fromRGB(160, 68, 255)
+		Namet.TextSize = 14.000
+		Namet.TextXAlignment = Enum.TextXAlignment.Left
+		Namet.TextTransparency = .5
+
+		local function Open()
+			local script = Instance.new('LocalScript', home_2)
+
+			local function Tween(Point_A, Time, Point_B)
+				game:GetService("TweenService"):Create(Point_A, TweenInfo(Time, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), Point_B):Play()
+			end
+
+			script.Parent.MouseButton1Click:Connect(function()
+				local NAME = script.Parent.Name
+				Tween(script.Parent, .25, {TextTransparency = 0})
+				Tween(script.Parent.Icon, .25, {ImageTransparency = 0})
+				for i,v in pairs(script.Parent.Parent:GetChildren()) do
+					if v:IsA("TextButton") then
+						if v.Name ~= NAME then
+							Tween(v, .25, {TextTransparency = .5})
+							Tween(v.Icon, .25, {ImageTransparency = .5})
+						end
+					end
+				end
+				script.Parent.Parent.Parent.Parent:FindFirstChild(NAME).Visible = true
+				script.Parent.Parent.Parent.Parent:FindFirstChild(NAME):TweenSize(UDim2.new(1, -142, 1, -56), "InOut", "Linear", "0.25");
+				for i,v in pairs(script.Parent.Parent.Parent.Parent:GetChildren()) do
+					if v:IsA("ScrollingFrame") then
+						if v.Name ~= NAME then
+							v:TweenSize(UDim2.new(1, -142, 1, -428), "InOut", "Linear", "0.25");
+						end
+					end
+				end
+				wait(.3)
+				for i,v in pairs(script.Parent.Parent.Parent.Parent:GetChildren()) do
+					if v:IsA("ScrollingFrame") then
+						if v.Name ~= NAME then
+							v.Visible = false;
+						end
+					end
+				end
+			end)
+
+		end
+
+		Open()
+	end
+	
+	return Tab
+end
+
+return Exoliner
